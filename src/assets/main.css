@@ -1,0 +1,40 @@
+
+
+
+button
+{
+        padding: 5px;
+        border: none;
+        box-shadow: 0px 0px 5px #fff;
+        border-radius: .5rem;
+        background-color: #2f855a;
+        cursor: pointer;
+        display: flex;
+        border-right-width: medium;
+        font-family: ui-monospace;
+        font-weight: 200;
+        color: #fff;
+
+}
+
+button :hover{
+  background-color: gold;
+}
+
+.y{
+  color: #f9edf3;
+  font-family: ui-monospace;
+  font-weight: 200;
+}
+
+*{
+  padding-left: 10px;
+  padding-block: 8px;
+  
+} 
+
+.btn-space{
+  padding-left: 2rem;
+}
+
+
