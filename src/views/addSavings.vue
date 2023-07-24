@@ -3,7 +3,7 @@
 <popMenu :message="messagePop" v-if="showPopMenu" />
 
     <div class="pageWrapper">
-            <div class="smsFORM">
+            <div class="addSavingsForm">
                     <div class="cancel">
                             <span @click="$emit('closeForm')">
                                 <i class="fa-solid fa-xmark" />
@@ -94,7 +94,7 @@ export default{
                 this.paymentMethod == null ||
                 this.refNumber == null 
             ){
-                this.invokeMenu("All fiels required");
+                this.invokeMenu("All fields required!!");
             }else{
 
                 this.invokeMenu("Recording savings...");
@@ -116,7 +116,7 @@ export default{
                 .catch((err) => {
                     this.messagePop = err.response.data;
                     if(err.response.data == "" || err.response.data == null){
-                        this.messagePop = "Try agai later!!"
+                        this.messagePop = "Try again later!!"
                     }
 
                     this.invokeMenu = true;
@@ -170,8 +170,16 @@ export default{
 }
 .pageWrapper
 {
-    width: 50vw;
-    height: 50vh;
+    background-color: rgba(0,0,0,0.5);
+    position: fixed;
+    z-index: 100;  
+    width: 98rem;
+    height: 49rem;
+    /* margin:auto; */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     
 }
 .x{
@@ -186,11 +194,10 @@ export default{
 }
 
 
-.smsFORM{
+.addSavingsForm{
     
     background-color: #2f855a;
     position: fixed;
-    z-index: 1;
     border-radius: 5px;
     padding: 20px !important;
     min-height: 20rem;

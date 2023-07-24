@@ -18,6 +18,9 @@ import Help from './Help.vue';
 
 
 export default{
+
+    components: { Help },
+    
     data() {
         return {
             show: false,
@@ -33,7 +36,7 @@ export default{
             }
         }
     },
-    components: { Help }
+    
 }
 
 </script>

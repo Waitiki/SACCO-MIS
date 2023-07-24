@@ -3,7 +3,7 @@
 
 
     <div class="pageWrapper">
-            <div class="smsFORM">
+            <div class="addMemberForm">
                     <div class="cancel">
                             <span @click="$emit('closeForm')">
                                 <i class="fa-solid fa-xmark" />
@@ -183,7 +183,7 @@ export default{
                 this.relationshipTwo == null
 
             ){
-                this.invokeMenu("All fields required");
+                this.invokeMenu("All fields required!!");
             }else{
                 this.invokeMenu("Registering Member....");
                 let data = {
@@ -274,7 +274,16 @@ export default{
 .pageWrapper
 {
     width: 100vw;
-    height: 100vh;   
+    background-color: rgba(0,0,0,0.5);
+    position: fixed;
+    z-index: 100;  
+    width: 98rem;
+    height: 49rem;
+    /* margin:auto; */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;  
 
 }
 .x{
@@ -289,11 +298,10 @@ export default{
 }
 
 
-.smsFORM{
+.addMemberForm{
     
     background-color: #2f855a;
     position: fixed;
-    z-index: 1;
     border-radius: 5px;
     padding: 40px !important;
     padding-top: 20px !important;

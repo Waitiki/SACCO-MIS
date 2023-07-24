@@ -1,8 +1,14 @@
 <template>
 
-    <div class="popeSpace">
-         <h2> {{ message }} </h2>
-    </div>       
+    <div class="space-wrap">
+        <div class="popeSpace">
+            <div class="message-space">
+                <h2> {{ message }} </h2>
+            </div>
+            
+        </div>
+    </div>
+           
              
 </template>
 
@@ -28,24 +34,39 @@ export default{
     
 }
 
+
 .popeSpace h2{
-    padding-top: 2rem;
+    padding-top: 2.5rem;
+}
+
+.message-space{
+    width: 30rem;
+    height: 7rem;
+    background-color: aqua;
+    margin: auto;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin-top: 300px;
+    border-radius: 5px;
+    /* color: white; */
+    
+   
+
 }
 .popeSpace{
-    background-color: aqua;
+    background-color: rgba(0,0,0,0.5);
     position: fixed;
-    z-index: 100;
-    border-radius: 5px;
-    width: 25rem;
-    height: 7rem;
-    margin:auto;
+    z-index: 1000;  
+    width: 98rem;
+    height: 49rem;
+    /* margin:auto; */
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
+  
+   
     
     /* width: 25rem;
     height: 7rem;

@@ -1,6 +1,6 @@
 <template>
     <div class="pageWrapper">
-        <div class="smsFORM">
+        <div class="helpFORM">
       
            
       <div class="cancel">
@@ -61,8 +61,16 @@
 }
 .pageWrapper
 {
-    width: 100vw;
-    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    position: fixed;
+    z-index: 100;  
+    width: 98rem;
+    height: 49rem;
+    /* margin:auto; */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     
 }
 .x{
@@ -77,15 +85,15 @@
 }
 
 
-.smsFORM{
+.helpFORM{
     
     background-color: #2f855a;
     position: fixed;
-    z-index: 1;
     border-radius: 5px;
     padding: 20px !important;
     min-height: 20rem;
     margin:auto;
+    top: 0;
     left: 0;
     right: 0;
     width:30rem;
