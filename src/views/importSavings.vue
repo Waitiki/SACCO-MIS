@@ -81,6 +81,7 @@
     border-radius: 5px;
     padding: 20px !important;
     margin:auto;
+    top: 0;
     left: 0;
     right: 0;
     width:30rem;

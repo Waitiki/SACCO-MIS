@@ -10,61 +10,61 @@ const routes = [
   {
     path: "/dashboard",
     name: "Dashboard",
-    component: import('../views/Dashboard.vue'),
+    component: () => import('../views/Dashboard.vue'),
   },
 
   {
     path: "/Email",
     name: "Email",
-    component: import('../views/Email.vue'),
+    component: () => import('../views/Email.vue'),
   },
 
   {
     path: "/SMS",
     name: "SMS",
-    component: import('../views/SMS.vue'),
+    component: () => import('../views/SMS.vue'),
   },
 
   {
     path: "/Members",
     name: "Members",
-    component: import('../views/Members.vue'),
+    component: () => import('../views/Members.vue'),
   },
 
   {
     path: "/Loans",
     name: "Loans",
-    component: import('../views/Loans.vue'),
+    component: () => import('../views/Loans.vue'),
   },
 
   {
     path: "/Products",
     name: "Products",
-    component: import('../views/Products.vue'),
+    component: () => import('../views/Products.vue'),
   },
 
   {
     path: "/Savings",
     name: "Savings",
-    component: import('../views/Savings.vue'),
+    component: () => import('../views/Savings.vue'),
   },
 
   {
     path: "/navBar",
     name: "navBar",
-    component: import('../views/navBar.vue'),
+    component: () => import('../views/navBar.vue'),
   },
 
   {
     path: "/Reports",
     name: "Reports",
-    component: import('../views/Reports.vue'),
+    component: () => import('../views/Reports.vue'),
   },
 
   {
     path: "/addMember",
     name: "addMember",
-    component: import('../views/addMember.vue'),
+    component: () => import('../views/addMember.vue'),
   },
 
     // {
@@ -75,50 +75,68 @@ const routes = [
     {
       path: "/Expenses",
       name: "Expenses",
-      component: import('../views/Expenses.vue'),
+      component: () => import('../views/Expenses.vue'),
     },
 
     {
       path: "/addExpenses",
       name: "addExpenses",
-      component: import('../views/addExpenses.vue'),
+      component: () => import('../views/addExpenses.vue'),
     },
 
     {
       path: "/addLoan",
-      name: "/addLoan",
-      component: import('../views/addLoan.vue'),
+      name: "addLoan",
+      component: () => import('../views/addLoan.vue'),
     },
 
     {
       path: "/addSavings",
-      name: "/addSavings.vue",
-      component: import('../views/addSavings.vue'),
+      name: "addSavings.vue",
+      component: () => import('../views/addSavings.vue'),
     },
 
     {
       path: "/importSavings",
-      name: "/importSavings",
-      component: import('../views/importSavings.vue'),
+      name: "importSavings",
+      component: () => import('../views/importSavings.vue'),
     },
 
     {
       path: "/addProduct",
-      name: "/addProduct",
-      component: import('../views/addProduct.vue'),
+      name: "addProduct",
+      component: () => import('../views/addProduct.vue'),
     },
 
     {
       path: "/importMembers",
-      name: "/importMembers",
-      component: import('../views/importMembers.vue'),
+      name: "importMembers",
+      component: () => import('../views/importMembers.vue'),
     },
 
     {
       path: "/Help",
-      name: "/Help",
-      component: import('../views/Help.vue'),
+      name: "Help",
+      component: () => import('../views/Help.vue'),
     },
+
+    {
+      path: "/Login",
+      name: "Login",
+      component: () => import('../signUp/signIn/Login.vue')
+    },
+
+    {
+      path: "/Sign-up",
+      name: "Sign-up",
+      component: () => import('../signUp/Sign-up.vue')
+    },
+
+    {
+      path: "/TESTS",
+      name: "TESTS",
+      component: () => import('../views/TESTS.vue')
+    }
 
     
 ];

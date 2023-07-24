@@ -32,7 +32,7 @@ export default {
                 <SidebarLink to="/Expenses" icon="fa-solid fa-sack-dollar">Expenses</SidebarLink>
                 <SidebarLink to="/SMS" icon="fa-solid fa-message fa-beat">SMS</SidebarLink>
                 <SidebarLink to="/Email" icon="fa-solid fa-envelope">EMAIL</SidebarLink>
-                <SidebarLink to="/Reports" icon="fa-solid fa-diagram-project">Reports</SidebarLink>
+                <SidebarLink to="/TESTS" icon="fa-solid fa-diagram-project">Reports</SidebarLink>
                 
             
                 

@@ -1,5 +1,7 @@
-
 <template>
+
+<popMenu :message="popMessage" v-if="showPopMenu" />
+
     <div class="pageWrapper">
         <div class="smsFORM">
             
@@ -15,12 +17,12 @@
                     
                     <label for="" class="y">VENDOR:</label>
                     <label for="" class="y">EXPENSE:</label>
-                    <input class="x" type="text" placeholder="Enter Vendor:">
-                    <input class="x" type="text" placeholder="Enter Expense:">
+                    <input class="x" type="text" placeholder="Enter Vendor:" v-model="vendor">
+                    <input class="x" type="text" placeholder="Enter Expense:" v-model="expense">
                     <label for="" class="y">REF NUMBER:</label>
                     <label for="" class="y">AMOUNT:</label>
-                    <input class="x" type="number" placeholder="Ref Number:">
-                    <input class="x" type="number" placeholder="Amount">
+                    <input class="x" type="text" placeholder="Ref Number:" v-model="refNumber">
+                    <input class="x" type="number" placeholder="Amount" v-model="amount">
                         
                         
                 </div>
@@ -28,7 +30,7 @@
 
                 <div class="btn-Exp">
 
-                        <button class="btn-form" type="submit">ADD EXPENSE</button>
+                        <button class="btn-form" type="submit" @click="addExpense">ADD EXPENSE</button>
 
                 </div>
         
@@ -39,6 +41,91 @@
 </template>
 
 <script>
+import axios from 'axios';
+import popMenu from '../components/popMenu.vue'
+
+export default{
+    components: { popMenu },
+    
+    data(){
+        return {
+            vendor: null,
+            expense: null,
+            refNumber: null,
+            amount: null,
+            popMessage: "",
+            showPopMenu: false,
+        }
+    },
+
+    methods: {
+
+        invokeMenu(value){
+            this.popMessage = value;
+            this.showPopMenu = true;
+
+            setTimeout(() => {
+                this.showPopMenu = false;
+            }, 3000)
+
+        },
+
+        addExpense(){
+
+            if(
+                this.vendor == null ||
+                this.expense == null ||
+                this.refNumber == null ||
+                this.amount == null
+            ){
+                this.invokeMenu("All fields required!!");
+            }else{
+                this.invokeMenu("Recording expense...");
+                let data = {
+                    vendor: this.vendor,
+                    expense: this.expense,
+                    refNumber: this.refNumber,
+                    amount: this.amount
+                };
+                axios.post("/addExpenses", data)
+                .then((res) => {
+                    res = res.data;
+                    this.invokeMenu("Expense recorded");
+                    
+
+                    setTimeout(() => {
+                        this.showPopMenu = false;
+                    },2000)
+                })
+                .catch((err) => {
+                    this.popMessage = err.response.data;
+                    if(err.response.data == "" || err.response.data == null){
+                        this.popMessage = "Try again later!!";
+                    }
+                    this.showPopMenu = true;
+                    setTimeout(() => {
+                        this.showPopMenu = false;
+                    },2000)
+
+
+                });
+
+
+
+            }
+
+
+
+        }
+
+
+
+
+    }
+
+
+
+}
 
 </script>
 
@@ -90,6 +177,7 @@
     padding: 20px !important;
     min-height: 20rem;
     margin:auto;
+    top: 0;
     left: 0;
     right: 0;
     width:30rem;

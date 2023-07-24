@@ -1,4 +1,7 @@
 <template>
+
+<popMenu :message="messagePop" v-if="showPopMenu" />
+
     <div class="pageWrapper">
             <div class="smsFORM">
                     <div class="cancel">
@@ -13,25 +16,25 @@
                         <label for="" class="y">ID NUMBER:</label>
                         <label for="" class="y">SERVED BY:</label>
 
-                        <input class="x" type="number" placeholder="Enter ID number">
-                        <input class="x" type="number">
+                        <input class="x" type="number" placeholder="Enter ID number" v-model="idNumber">
+                        <input class="x" type="number" v-model="servedBy">
 
                         <label for="" class="y">AMOUNT:</label>
                         <label for="" class="y">DATE RECEIVED:</label>
 
-                        <input class="x" type="number" placeholder="Enter ID number">
-                        <input class="x" type="date">
+                        <input class="x" type="number" placeholder="Enter ID number" v-model="amount">
+                        <input class="x" type="date" v-model="dateReceived">
 
                         <label for="" class="y">PAYMENT METHOD:</label>
                         <label for="" class="y">REF NUMBER:</label>
 
-                        <select class="x" name="" id="">
-                            <option>Select Option</option>
+                        <select class="x" name="" id="" v-model="paymentMethod">
+                            <option disabled>Select Option</option>
                             <option>Cash</option>
                             <option>Cheque</option>
                             <option>Mpesa</option>
                         </select>
-                        <input class="x" type="number">
+                        <input class="x" type="text" v-model="refNumber">
                             
                          
                     </div>
@@ -39,7 +42,7 @@
 
                     <div class="btn-Send">
 
-                            <button class="btn-form" type="submit">ADD SAVINGS</button>
+                            <button class="btn-form" type="submit" @click="addSavings">ADD SAVINGS</button>
 
                     </div>
             
@@ -50,6 +53,98 @@
     </div>
   
 </template>
+
+<script>
+import axios from 'axios';
+import popMenu from '../components/popMenu.vue'
+
+export default{
+    
+    components: { popMenu },
+
+    data(){
+        return {
+            idNumber: null,
+            servedBy: null,
+            amount: null,
+            dateReceived: null,
+            paymentMethod: null,
+            refNumber: null,
+            messagePop: '',
+            showPopMenu: false
+        }
+    },
+
+    methods: {
+
+        invokeMenu(value){
+            this.messagePop = value;
+            this.showPopMenu = true;
+            setTimeout(() => {
+                this.showPopMenu = false;
+            },3000)
+        },
+
+        addSavings(){
+            if(
+                this.idNumber == null ||
+                this.servedBy == null ||
+                this.amount == null ||
+                this.dateReceived == null ||
+                this.paymentMethod == null ||
+                this.refNumber == null 
+            ){
+                this.invokeMenu("All fiels required");
+            }else{
+
+                this.invokeMenu("Recording savings...");
+
+                let data = {
+                    idNumber: this.idNumber,
+                    servedBy: this.servedBy,
+                    amount: this.amount,
+                    dateReceived: this.dateReceived,
+                    paymentMethod: this.paymentMethod,
+                    refNumber: this.refNumber,
+                };
+
+                axios.post("/addSavings", data)
+                .then((res) => {
+                    this.invokeMenu("Savings recorded");
+                    res = res.data;
+                })
+                .catch((err) => {
+                    this.messagePop = err.response.data;
+                    if(err.response.data == "" || err.response.data == null){
+                        this.messagePop = "Try agai later!!"
+                    }
+
+                    this.invokeMenu = true;
+                    setTimeout(() => {
+                        this.invokeMenu= false;
+                    },200)
+
+                });
+
+
+
+
+            }
+
+
+
+        },
+
+
+
+
+
+    },
+
+
+}
+
+</script>
 
 
 
@@ -100,6 +195,7 @@
     padding: 20px !important;
     min-height: 20rem;
     margin:auto;
+    top: 0;
     left: 0;
     right: 0;
     width:30rem;
