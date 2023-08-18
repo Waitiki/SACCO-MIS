@@ -98,17 +98,18 @@ export default{
                     },2000)
                 })
                 .catch((err) => {
-                    this.popMessage = err.response.data;
-                    if(err.response.data == "" || err.response.data == null){
-                        this.popMessage = "Try again later!!";
-                    }
-                    this.showPopMenu = true;
-                    setTimeout(() => {
-                        this.showPopMenu = false;
-                    },2000)
+                this.popMessage = err.response.data;
+                if (err.response.data == "" || err.response.data == null) {
+                this.popMessage = "Try again later!!";
+                }
+                console.log(this.popMessage);
+                this.showPopMenu = true;
+                
 
-
-                });
+                setTimeout(() => {
+                this.showPopMenu = false;
+                }, 2000);
+            });
 
 
 

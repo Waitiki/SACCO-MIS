@@ -7,58 +7,51 @@
           <div>
             <button>
                 <button>
-                    <button @click="openForm">ADD NEW PRODUCT</button>
+                    <button @click="openForm">DEBIT</button>
                 </button>
             </button>
           </div>
 
           <div class="search-bar">
-              <input class="x" type="text" placeholder="SEARCH PRODUCTS">
+              <input class="x" type="text" placeholder="SEARCH WITHDRAWALS">
           </div>
         
           <div class="header">
                 <ul>
-                  <li><h3>PRODUCT CODE</h3></li>
-                  <li><h3>LOAN NAME</h3></li>
-                  <li><h3>INTEREST</h3></li>
-                  <li><h3>DURATION</h3></li>
-                  <li><h3>LIMIT</h3></li>
-                  <li><h3>GUARANTORS</h3></li>
-                  <!-- <li><h3>STATUS</h3></li> -->
+                  <li><h3>ACCOUNT NUMBER</h3></li>
+                  <li><h3>AMOUNT</h3></li>
+                  <li><h3>TIME</h3></li>
                   <li><h3>ACTION</h3></li>
                 </ul>
           </div>
   
           <div class="space">
-              <ul v-for="product in products" :key="product.id">
-                <li>{{ product.productCode }}</li>
-                <li>{{ product.loanName }}</li>
-                <li>{{ product.loanInterest }}</li>
-                <li>{{ product.loanDuration }}</li>
-                <li>{{ product.maximumLimit }}</li>
-                <li>{{ product.guarantors }}</li>
-                <!-- <li>{{ product.status }}</li> -->
+              <ul v-for="withdrawal in withdrawals" :key="withdrawal.id">
+                <li>{{ withdrawal.accountNumber }}</li>
+                <li>{{ withdrawal.amount }}</li>
+                <li>{{ withdrawal.createdAt }}</li>
+                <!-- <li>{{ withdrawal.status }}</li> -->
                 <li class="action-buttons">
                     <button @click="editExpense(expense)">EDIT</button>
-                    <button @click="deleteProduct(product.id)">DELETE</button>
+                    <button @click="deleteProduct(withdrawal.id)">DELETE</button>
                 </li>
               </ul>
           </div>
   
     </div>
 
-    <addProduct @closeForm="openForm" v-if="show"/>
+    <Debit @closeForm="openForm" v-if="show"/>
   </template>
   
   <script>
   import axios from 'axios';
-  import addProduct from './addProduct.vue'
+  import Debit from './Debit.vue'
 
 
 
   export default{
 
-    components: { addProduct },
+    components: { Debit },
 
     data(){
       return {
@@ -67,7 +60,7 @@
     //    refNumber: '',
     //    amount: '',
        show: false,
-       products: [],
+       withdrawals: [],
     //    expense: {}
       }
     },
@@ -91,9 +84,9 @@
         try{
   
          
-          const products = await axios.get("/viewProducts");
+          const withdrawals = await axios.get("/listOfWithdrawals");
   
-          this.products = products.data;
+          this.withdrawals = withdrawals.data;
         }catch(e){
           console.log(e);
         }

@@ -38,9 +38,9 @@ const routes = [
   },
 
   {
-    path: "/Products",
-    name: "Products",
-    component: () => import('../views/Products.vue'),
+    path: "/Withdrawal",
+    name: "Withdrawal",
+    component: () => import('../views/Withdrawal.vue'),
   },
 
   {
@@ -103,9 +103,9 @@ const routes = [
     },
 
     {
-      path: "/addProduct",
-      name: "addProduct",
-      component: () => import('../views/addProduct.vue'),
+      path: "/Debit",
+      name: "Debit",
+      component: () => import('../views/Debit.vue'),
     },
 
     {
@@ -136,6 +136,12 @@ const routes = [
       path: "/TESTS",
       name: "TESTS",
       component: () => import('../views/TESTS.vue')
+    },
+
+    {
+      path: "/Transfers",
+      name: "Transfers",
+      component: () => import('../views/Transfers.vue')
     }
 
     

@@ -24,8 +24,7 @@
         
           <div class="header">
                 <ul>
-                  <li><h3>ID NUMBER</h3></li>
-                  <li><h3>REF NUMBER</h3></li>
+                  <li><h3>ACCOUNT NUMBER</h3></li>
                   <li><h3>AMOUNT</h3></li>
                   <li><h3>DATE</h3></li>
                   <li><h3>ACTION</h3></li>
@@ -34,10 +33,9 @@
   
           <div class="space">
               <ul v-for="save in savings" :key="save.id">
-                <li>{{ save.idNumber }}</li>
-                <li>{{ save.refNumber }}</li>
+                <li>{{ save.accountNumber }}</li>
                 <li>{{ save.amount }}</li>
-                <li>{{ save.dateReceived }}</li>
+                <li>{{ save.createdAt }}</li>
                 <li class="action-buttons">
                     <button @click="editExpense(expense)">EDIT</button>
                     <button @click="deleteSavings(save.id)">DELETE</button>
@@ -102,7 +100,7 @@
         try{
   
          
-          const savings = await axios.get("/viewSavings");
+          const savings = await axios.get("/listOfSavings");
   
           this.savings = savings.data;
         }catch(e){

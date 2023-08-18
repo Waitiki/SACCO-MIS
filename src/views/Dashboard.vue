@@ -14,7 +14,7 @@
               <div class="content">
                   <h2 class="y">Total Members</h2>
                   <span>
-                    <h3 class="pele-text">8000</h3>
+                    <h3 class="pele-text">{{ memberCount }}</h3>
                   </span>
               </div>
           </div>
@@ -26,7 +26,7 @@
               <div class="content">
                 <h2 class="y">Total Products</h2>
                   <span>
-                    <h3 class="pele-text">8000</h3>
+                    <h3 class="pele-text">{{ productCount }}</h3>
                   </span>
               </div>
           </div>
@@ -50,7 +50,7 @@
               <div class="content">
                 <h2 class="y">Total Savings</h2>
                   <span>
-                    <h3 class="pele-text">8000</h3>
+                    <h3 class="pele-text">{{ totalBalance }}</h3>
                   </span>
               </div>
           </div>
@@ -73,13 +73,132 @@
 
        
        <div class="recents">
-        <h3 class="">Recent Transactions</h3>
+        <h1 class="Head-title">Recent Transactions</h1>
+
+        <div class="transactions-header">
+          <ul>
+            <li>ACCOUNT NUMBER</li>
+            <li>TRANSACTION TYPE</li>
+            <li>AMOUNT</li>
+            <li>STATUS</li>
+            <li>TIME</li>
+          </ul>
+        </div>
+
+        <div class="transactions-body">
+          <ul v-for="transaction in transactions" :key="transaction.transactionId">
+              <li>{{ transaction.accountNumber }}</li>
+              <li>{{ transaction.transactionType }}</li>
+              <li>{{ transaction.amount }}</li>
+              <li>{{ transaction.status }}</li>
+              <li>{{ transaction.createdAt }}</li>
+          </ul>
+        </div>
        </div>
    
     </div>
     
    
    </template>
+
+   <script>
+  import axios from 'axios';
+
+  export default {
+    data(){
+      return {
+        memberCount: 0,
+        productCount: 0,
+        totalBalance: 0,
+        transactions: [],
+      }
+    },
+    created(){
+      this.fetchMemberCount();
+      this.fetchProductCount();
+      this.fetchTotalBalance();
+      this.transactionsReload();
+    },
+
+    methods: {
+      fetchMemberCount(){
+        axios.get("/totalUsers")
+        .then((res) => {
+          this.memberCount = res.data;
+        })
+        .catch((err) => {
+          console.error('Error fetching member count:', err);
+        })
+      },
+
+      fetchProductCount(){
+        axios.get("/numberOfProducts")
+        .then((res) => {
+          this.productCount = res.data;
+        })
+        .catch((err) => {
+          console.error('Error fetching number count', err);
+        })
+      },
+
+      fetchTotalBalance(){
+        axios.get("/totalBalance")
+        .then((res) => {
+          this.totalBalance = res.data;
+        })
+        .catch((err) => {
+          console.error('Error fetching total balance', err)
+        })
+      },
+
+      // transactionsReload(){
+      //   axios.get("/viewTransactions")
+      //   .then((res) => {
+      //     res = res.data;
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   })
+      
+      // },
+       async transactionsReload(){
+
+        try{
+
+           const transactions = await axios.get("/viewTransactions");
+           this.transactions = transactions.data;
+
+        }catch(e){
+          console.log(e);
+        }
+      },
+
+
+
+
+
+
+
+    },
+
+     
+
+
+
+
+
+    }
+
+
+
+
+    
+
+
+
+  
+  
+  </script>
    
    <style scoped>
 
@@ -148,7 +267,43 @@
      justify-content: center;
    }
    
+   .transactions-header{
+    padding-top: 1rem;
+   }
+   .transactions-header ul{
+    display: flex;
+    gap: .2rem;
+    margin-bottom: .5em;
+   }
+   .transactions-header ul li{
+    padding: 6px;
+    background-color: #185335;
+    color: white;
+    width: 15rem;
+    list-style: none;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: .2rem;
+    
+   }
+   .transactions-body ul{
+    display: flex;
+    gap: .2rem;
+    margin-bottom: .5rem;
+   }
+   .transactions-body ul li{
+    padding: 8px;
+    background-color: #2f855a;
+    color: white;
+    width: 15rem;
+    list-style: none;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: .2rem;
+   }
    
-   
+   .Head-title{
+    color: #185335;
+   }
    
    </style> 

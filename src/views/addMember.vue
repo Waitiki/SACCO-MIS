@@ -70,18 +70,18 @@
                         <label for="" class="y">PHONE NUMBER:</label>
                         <label for="" class="y">RELATIONSHIP:</label>
 
-                        <input class="x" type="text" placeholder="Next of kin-1" v-model="kinOne">
-                        <input class="x" type="number" placeholder="Kin-1's phone number" v-model="kinOnePhone">
-                        <input class="x" type="text" placeholder="Relationsip to kin-1" v-model="relationshipOne">
+                        <input class="x" type="text" placeholder="Next of kin-1" v-model="nextOfKin1">
+                        <input class="x" type="number" placeholder="Kin-1's phone number" v-model="kin1Phone">
+                        <input class="x" type="text" placeholder="Relationsip to kin-1" v-model="kin1Relationship">
                             
 
                         <label for="" class="y">NEXT OF KIN-2:</label>
                         <label for="" class="y">PHONE NUMBER:</label>
                         <label for="" class="y">RELATIONSHIP:</label>
 
-                        <input class="x" type="text" placeholder="Next of kin-2" v-model="kinTwo">
-                        <input class="x" type="number" placeholder="Kin-2's phone number" v-model="kinTwoPhone">
-                        <input class="x" type="text" placeholder="Relationsip to kin-2" v-model="relationshipTwo">
+                        <input class="x" type="text" placeholder="Next of kin-2" v-model="nextOfKin2">
+                        <input class="x" type="number" placeholder="Kin-2's phone number" v-model="kin2Phone">
+                        <input class="x" type="text" placeholder="Relationsip to kin-2" v-model="kin2Relationship">
                             
                          
                     </div>
@@ -136,12 +136,12 @@ export default{
             address: null,
             gender: null,
             position: null,
-            kinOne: null,
-            kinOnePhone: null,
-            relationshipOne: null,
-            kinTwo: null,
-            kinTwoPhone: null,
-            relationshipTwo: null,
+            nextOfKin1: null,
+            kin1Phone: null,
+            kin1Relationship: null,
+            nextOfKin2: null,
+            kin2Phone: null,
+            kin2Relationship: null,
             messagePop: ' ',
             showPopMenu: false,
         }
@@ -175,12 +175,12 @@ export default{
                 this.address == null ||
                 this.gender == null ||
                 this.position == null ||
-                this.kinOne == null ||
-                this.kinOnePhone == null ||
-                this.relationshipOne == null ||
-                this.kinTwo == null ||
-                this.kinTwoPhone == null ||
-                this.relationshipTwo == null
+                this.nextOfKin1 == null ||
+                this.kin1Phone == null ||
+                this.kin1Relationship == null ||
+                this.nextOfKin2 == null ||
+                this.kin2Phone == null ||
+                this.kin2Relationship == null
 
             ){
                 this.invokeMenu("All fields required!!");
@@ -202,14 +202,14 @@ export default{
                     address: this.address,
                     gender: this.gender,
                     position: this.position,
-                    kinOne: this.kinOne,
-                    kinOnePhone: this.kinOnePhone,
-                    relationshipOne: this.relationshipOne,
-                    kinTwo: this.kinTwo,
-                    kinTwoPhone: this.kinTwoPhone,
-                    relationshipTwo: this.relationshipTwo,
+                    nextOfKin1: this.nextOfKin1,
+                    kin1Phone: this.kin1Phone,
+                    kin1Relationship: this.kin1Relationship,
+                    nextOfKin2: this.nextOfKin2,
+                    kin2Phone: this.kin2Phone,
+                    kin2Relationship: this.kin2Relationship,
                 };
-                axios.post("/addMembers", data)
+                axios.post("/createAccount", data)
                 .then((res) => {
                     this.invokeMenu("Successfully registered.");
                     res=res.data;

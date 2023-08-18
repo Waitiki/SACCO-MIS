@@ -26,8 +26,9 @@ export default {
 
                 <SidebarLink to="/dashboard" icon="fas fa-home" default="true">Home</SidebarLink>
                 <SidebarLink to="/Members" icon="fas fa-users">Members</SidebarLink>
-                <SidebarLink to="/Products" icon="fa-solid fa-coins">Products</SidebarLink>
                 <SidebarLink to="/Savings" icon="fa-solid fa-piggy-bank fa-xl">Savings</SidebarLink>
+                <SidebarLink to="/Withdrawal" icon="fa-solid fa-coins">Withdrawal</SidebarLink>
+                <SidebarLink to="Transfers" icon="fa-solid fa-money-bill-transfer">Transfer</SidebarLink>
                 <SidebarLink to="/Loans" icon="fas fa-chart-bar">Loan Management</SidebarLink>
                 <SidebarLink to="/Expenses" icon="fa-solid fa-sack-dollar">Expenses</SidebarLink>
                 <SidebarLink to="/SMS" icon="fa-solid fa-message fa-beat">SMS</SidebarLink>

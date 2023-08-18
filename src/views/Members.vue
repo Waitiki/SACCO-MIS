@@ -27,10 +27,10 @@
                     <li><h3>NAME</h3></li>
                     <li><h3>CONTACT</h3></li>
                     <li><h3>GENDER</h3></li>
-                    <li><h3>POSITION</h3></li>
+                    <li><h3>ACCOUNT NUMBER</h3></li>
+                    <li><h3>BALANCE</h3></li>
                     <li><h3>NEXT OF KIN</h3></li>
                     <li><h3>KINS CONTACT</h3></li>
-                    <li><h3>DOCUMENTS</h3></li>
                     <li><h3>ACTIONS</h3></li>
                 </ul>
           </div>
@@ -42,10 +42,10 @@
                 <li>{{ member.fullName }}</li>
                 <li>{{ member.phone1 }}</li>
                 <li>{{ member.gender }}</li>
-                <li>{{ member.position }}</li>
-                <li>{{ member.kinOne }}</li>
-                <li>{{ member.kinOnePhone }}</li>
-                <li><i>Download</i></li>
+                <li>{{ member.accountNumber }}</li>
+                <li>{{ member.accountBalance }}</li>
+                <li>{{ member.nextOfKin1 }}</li>
+                <li>{{ member.kin1Phone }}</li>
                 <li class="action-buttons">
                     <button @click="editExpense(expense)">EDIT</button>
                     <button @click="deleteMember(member.id)">DELETE</button>
@@ -111,7 +111,7 @@
         try{
   
          
-          const members = await axios.get("/viewMembers");
+          const members = await axios.get("/listOfUsers");
   
           this.members = members.data;
         }catch(e){
@@ -125,7 +125,7 @@
         let x = window.confirm("Are you sure you want to delete this member?");
 
         if(x){
-            await axios.delete("/deleteMembers/" + id);
+            await axios.delete("/deleteAccount/" + id);
             alert("Member deleted!!");
             this.membersReload();
         }

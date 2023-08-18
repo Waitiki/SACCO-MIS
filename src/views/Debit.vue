@@ -3,41 +3,32 @@
 <popMenu :message="messagePop" v-if="showPopMenu" />
 
     <div class="pageWrapper">
-            <div class="addSavingsForm">
+            <div class="addProductForm">
                     <div class="cancel">
                             <span @click="$emit('closeForm')">
                                 <i class="fa-solid fa-xmark" />
                             </span>
                     </div>
-                    <h2 class="formTitle">ADD NEW SAVINGS</h2>
+                    <h2 class="formTitle">WITHDRAWAL</h2>
                     <hr>
                     <div class="userInput">
 
                         <label for="" class="y">ACCOUNT NUMBER:</label>
-                        <label for="" class="y">SERVED BY:</label>
-
-                        <input class="x" type="number" placeholder="Enter account number" v-model="accountNumber">
-                        <input class="x" type="number">
-
                         <label for="" class="y">AMOUNT:</label>
-                        <label for="" class="y">PAYMENT METHOD:</label>
+                        <input type="number" class="x" v-model="accountNumber">
+                        <input type="number" class="x" v-model="amount">
 
-                        <input class="x" type="number" placeholder="Enter amount" v-model="amount">
-                        <select class="x" name="" id="">
-                            <option disabled>Select Option</option>
-                            <option>Cash</option>
-                            <option>Cheque</option>
-                            <option>Mpesa</option>
-                        </select>
+                    <!-- <div class="bottom">
+
                         
-                            
+                        <textarea class="x" name="" id="" cols="20" rows="4" placeholder="Description:" v-model="description"/>
                          
-                    </div>
-                    <hr>
+                    </div> -->
+                 
 
                     <div class="btn-Send">
 
-                            <button class="btn-form" type="submit" @click="addSavings">ADD SAVINGS</button>
+                            <button class="btn-form" type="submit" @click="withdraw">Withdraw</button>
 
                     </div>
             
@@ -46,90 +37,87 @@
 
 
     </div>
+    </div>
   
 </template>
 
 <script>
+
 import axios from 'axios';
 import popMenu from '../components/popMenu.vue'
 
 export default{
-    
+
     components: { popMenu },
 
     data(){
         return {
             accountNumber: null,
             amount: null,
-            messagePop: '',
-            showPopMenu: false
+            showPopMenu: false,
+            messagePop: ''
+            
         }
     },
 
     methods: {
-
         invokeMenu(value){
             this.messagePop = value;
             this.showPopMenu = true;
+
             setTimeout(() => {
                 this.showPopMenu = false;
-            },3000)
+            }, 3000)
         },
 
-        addSavings(){
-            if(
-                this.accountNumber == null ||
-                this.amount == null 
-            ){
-                this.invokeMenu("All fields required!!");
-            }else{
+        withdraw(){
 
-                this.invokeMenu("Recording savings...");
+            if(this.accountNumber == null ||
+                this.amount == null
+        ){
+            this.invokeMenu("All fields required!!");
+        }else{
+            this.invokeMenu("Withdrawing....");
 
-                let data = {
-                    accountNumber: this.accountNumber,
-                    amount: this.amount,
-                    
-                };
+            let data = {
+                accountNumber: this.accountNumber,
+                amount: this.amount
+            };
 
-                axios.post("/credit", data)
-                .then((res) => {
-                    this.invokeMenu("Savings recorded");
-                    res = res.data;
-                })
-                .catch((err) => {
-                    this.messagePop = err.response.data;
-                    if(err.response.data == "" || err.response.data == null){
-                        this.messagePop = "Try again later!!"
-                    }
+            axios.post("/debit", data)
+            .then((res) => {
+                res = res.data;
+                this.invokeMenu("Withdrawal success");
+            })
+            .catch((err) => {
+                this.messagePop = err.response.data;
+                if(err.response.data == "" || err.response.data == null){
+                    this.messagePop = "Try again later!!";
+                }
 
-                    this.invokeMenu = true;
-                    setTimeout(() => {
-                        this.invokeMenu= false;
-                    },200)
+                this.showPopMenu = true;
 
-                });
+                setTimeout(() => {
+                    this.showPopMenu = false;
+                }, 2000)
+            });
 
 
 
-
-            }
+        }
 
 
 
         },
-
-
 
 
 
     },
 
 
+
 }
-
 </script>
-
 
 
 <style scoped>
@@ -178,13 +166,13 @@ export default{
 }
 
 
-.addSavingsForm{
+.addProductForm{
     
     background-color: #2f855a;
     position: fixed;
     border-radius: 5px;
     padding: 20px !important;
-    min-height: 20rem;
+    min-height: 15rem;
     margin:auto;
     top: 0;
     left: 0;
@@ -201,17 +189,17 @@ export default{
 {
     display: grid;
     grid-template-columns: repeat(2,1fr);
+    
     gap: .5rem;
     padding-top: 10px;
-    align-items: center !important;
-    justify-content: center !important;
 }
-.userInput select, input
+.userInput textarea, select, input
 {
     width: 90% !important;
     padding: 10px;
-
 }
+
+
 .cancel
 {
     display: flex;
