@@ -67,11 +67,6 @@ const routes = [
     component: () => import('../views/addMember.vue'),
   },
 
-    // {
-    // path: "/Login",
-    // name: "Login.vue",
-    // component: import('../Registration-module/Login.vue'),
-    // },
     {
       path: "/Expenses",
       name: "Expenses",
