@@ -1,26 +1,19 @@
 <template>
-
-    <div class="space-wrap">
-        <div class="popeSpace">
-            <div class="message-space">
-                <h2> {{ message }} </h2>
-            </div>
-            
+    <div class="wrap">
+        <div class="msg-body" :style="{ borderColor: borderColor }">
+            <h2> {{ message }} </h2>
         </div>
     </div>
-           
-             
 </template>
 
 <script>
+
 export default{
     props: {
-        message: String
-    },
-    data(){
-        this
-        return {
-
+        message: String,
+        borderColor: {
+            type: String,
+            default: 'gold'
         }
     }
 }
@@ -31,62 +24,44 @@ export default{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    
 }
-
-
-.popeSpace h2{
-    padding-top: 2.5rem;
-}
-
-.message-space{
-    width: 30rem;
-    height: 7rem;
-    background-color: aqua;
-    margin: auto;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    margin-top: 300px;
-    border-radius: 5px;
-    /* color: white; */
-    
-   
-
-}
-.popeSpace{
-    background-color: rgba(0,0,0,0.5);
-    position: fixed;
-    z-index: 1000;  
-    width: 98rem;
-    height: 49rem;
-    /* margin:auto; */
-    top: 0;
+.wrap{
+    background-color: rgba(17, 167, 167, 0.5);
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    right: 0;
+    left: 0;
     bottom: 0;
-    left: 0;
-    right: 0;
-  
-   
-    
-    /* width: 25rem;
-    height: 7rem;
-    background-color: aqua;
-    border-radius: 15px;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    left: 0;
-    right: 0;
     top: 0;
-    bottom: 0; */
-    
+    position: fixed;
 }
 
-/* .container{
-    display: flex;  
-    flex-direction: row-reverse;
-    gap: .5rem;
-} */
+.msg-body{
+    padding: 30px;
+    background-color: teal;
+    color: white;
+    /* left: 0;
+    right: 0; */
+    text-align: center;
+    width: 25rem;
+    margin: auto;
+    margin-top: 300px;
+    border-radius: .5rem;
+    /* box-shadow: 0px 0px 5px red; */
+    border: 2px solid;
+    /* font-family: ui-monospace; */
+}
 
+h2{
+    font-weight: 600;
+    font-family: ui-monospace;
+    font-size: larger;
+}
 
+@media only screen and (max-width: 767px) {
+.msg-body {
+  width: 85%;
+}
+}
 </style>

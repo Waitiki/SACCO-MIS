@@ -1,6 +1,7 @@
 <template>
     <div class="page-wrap">
-        <popMenu :message="messagePop" v-if="showPopMenu" />
+        <popMenu :message="messagePop" :borderColor="popBorderColor" v-if="showPopMenu"/>
+        <!-- <popMenu :message="popMessage" :borderColor="popBorderColor" v-if="showPopMenu"/> -->
         <div class="Login-wraper">
             <div class="Login-Form">
                 <div class="header">
@@ -73,13 +74,15 @@ export default{
             email: null,
             password: null,
             showPopMenu: false,
-            messagePop: " "
+            messagePop: " ",
+            popBorderColor: "gold"
         };
     },
     methods: {
 
-        displaymenu(value){
+        displaymenu(value, borderColor = 'gold'){
             this.messagePop = value;
+            this.popBorderColor = borderColor;
             this.showPopMenu = true;
             setTimeout(() =>{
                 this.showPopMenu = false;
@@ -87,57 +90,56 @@ export default{
         },
 
       tooglePassword() {
-      let checktype = document.getElementById("password");
-      if (this.currStatues == "visibility") {
-        this.currStatues = "visibility_off";
-        checktype.type = "password";
-      } else {
-        this.currStatues = "visibility";
-        checktype.type = "text";
-      }
-    },
+        let checktype = document.getElementById("password");
+        if (this.currStatues == "visibility") {
+            this.currStatues = "visibility_off";
+            checktype.type = "password";
+        } else {
+            this.currStatues = "visibility";
+            checktype.type = "text";
+        }
+        },
 
     login() {
+        if (this.firstName == null ||
+            this.secondName == null ||
+            this.email == null ||
+            this.password == null){
+            this.displaymenu("All fields required!!", 'red');
+        }else{
+            this.displaymenu("Registering an account!", "blue");
+            let data = {
+                firstName: this.firstName,
+                secondName: this.secondName,
+                email: this.email,
+                password: this.password,
+            };
+            axios.post("/register", data)
+                .then((res) => 
+                {
+                this.displaymenu("Successfully created an Account!");
+                setTimeout(() =>{
+                    this.$router.push({ name: "Login" });
+                    // let hello= localStorage.getItem("token");
+                    // console.log(hello);
+                },2000);
+                })     
+                .catch((err) => {
+                    this.messagePop = err.response.data;
+                    if (err.response.data == "" || err.response.data == null){
+                        this.messagePop = "Try again later!!";
+                        this.popBorderColor = "red";
+                    }
 
+                    console.log(this.messagePop);
+                    this.showPopMenu = true;
 
-if (this.firstName == null ||
-    this.secondName == null ||
-    this.email == null ||
-    this.password == null){
-    this.displaymenu("All fields required!!");
-}else{
-    this.displaymenu("Registering an account!");
-    let data = {
-        firstName: this.firstName,
-        secondName: this.secondName,
-        email: this.email,
-        password: this.password,
-    };
-    axios.post("/register", data)
-        .then((res) => 
-        {
-        this.displaymenu("Successfully created an Account!");
-        setTimeout(() =>{
-            this.$router.push({ name: "Login" });
-            // let hello= localStorage.getItem("token");
-            // console.log(hello);
-        },2000);
-         })     
-         .catch((err) => {
-            this.messagePop = err.response.data;
-            if (err.response.data == "" || err.response.data == null){
-                this.messagePop = "Try again later!!";
-            }
-
-            console.log(this.messagePop);
-            this.showPopMenu = true;
-
-            setTimeout(() => {
-                this.showPopMenu = false;
-            },2000 )
-         }) ;  
-    } 
-},
+                    setTimeout(() => {
+                        this.showPopMenu = false;
+                    },2000 )
+                }) ;  
+            } 
+        },
 
 
 logout() {
